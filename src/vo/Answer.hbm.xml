@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+   <class name="vo.AnswerVo" table="ANSWER">
+      <id name="ansID" type="int" column="ansID">
+         <generator class="increment"/>
+      </id>
+     
+      <property name="queID" column="queID" type="int"/>
+      <property name="semester" column="semester" type="int"/>
+      <property name="department" column="department" type="string"/>
+      <property name="name" column="name" type="string"/>
+      <property name="answer" column="answer" type="text"/>
+      <property name="date" column="date" type="string"/>
+      
+   </class>
+</hibernate-mapping>

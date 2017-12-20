@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+   <class name="vo.BlogsVo" table="BLOGS">
+      <id name="blog_id" type="int" column="blog_id">
+         <generator class="increment"/>
+      </id>
+     
+      <property name="blog_name" column="blog_name" type="string"/>
+       <property name="blog_enrollment" column="blog_enrollment" type="long"/>
+      <property name="blog_title" column="blog_title" type="string"/>
+      <property name="blog_file" column="blog_file" type="string"/>
+      <property name="blog_description" column="blog_description" type="text"/>
+      <property name="blog_date" column="blog_date" type="string"/>
+      <property name="blog_category" column="blog_category" type="string"></property>
+      
+   </class>
+</hibernate-mapping>

@@ -1,0 +1,395 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="vo.RegVo"%>
+<!DOCTYPE html>
+<%if(session.getAttribute("enrollment") == null){
+	response.sendRedirect("login.jsp");
+}else{ %>
+<html lang="en">
+<!-- Mirrored from demo.neontheme.com/frontend/about/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:29:29 GMT -->
+<head>
+<jsp:include page="/User/masterPage.jsp"></jsp:include>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Neon Admin Panel" />
+<meta name="author" content="Laborator.co" />
+<title>CampusTalk | Profiles</title>
+
+<link rel="stylesheet" href="../css/neon-forms.css"
+	id="style-resource-4">	
+<link rel="stylesheet" href="../css/neon.css"
+	id="style-resource-1">
+<link rel="stylesheet" href="../css/entypo.css" id="style-resource-2">
+<link rel="stylesheet" href="../css/frontendcss/neon.css"
+	id="style-resource-3">
+	
+<script src="../js/frontendjs/jquery-1.11.0.min.js"></script>
+<script>
+	$.noConflict();
+</script>
+<!--[if lt IE 9]><script src="http://demo.neontheme.com/assets/frontend/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+<!-- TS1442334161: Neon - Responsive Admin Template created by Laborator -->
+</head>
+<body>
+	<!-- TS14423341611099: Xenon - Boostrap Admin Template created by Laborator / Please buy this theme and support the updates -->
+	<div class="wrap">
+
+
+		<section class="breadcrumb">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1>View Profiles</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br>
+		<form method="post"
+			action="<%=request.getContextPath()%>/CTServlet?type=registration&operation=view&showcount=All&search=1">
+
+			<div class="form-group">
+				<center><label for="field-1" class="col-sm-1 control-label" style="margin-left: 2%">Name</label></center>
+				<div class="col-sm-2">
+					<input type="text" name="Name"
+						class="form-control" id="name"
+						id="field-1">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<center>
+					<label class="col-sm-1 control-label" >Semester</label>
+				</center>
+				<div class="col-sm-2">
+
+					<select class="form-control" name="Semester">
+						<option>All</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+					</select>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<center>
+					<label class="col-sm-1 control-label">Department</label>
+				</center>
+				<div class="col-sm-2">
+
+					<select class="form-control" name="Department">
+						<option>All</option>
+						<option>Mechanical</option>
+						<option>Electrical</option>
+						<option>Civil</option>
+						<option>Computer</option>
+						<option>IT</option>
+						<option>E&C</option>
+						<option>I&C</option>
+						<option>Environment</option>
+						<option>Textile</option>
+						<option>Plastic</option>
+						<option>Rubber</option>
+						<option>Chemical</option>
+						<option>Bio Medical</option>
+						<option>Applied Mechanics</option>
+						<option>General</option>
+					</select>
+
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-info btn-icon col-sm-1"
+				style="margin-left: 5%">
+				Go <i class="entypo-search"></i>
+			</button>
+		</form>
+
+
+		<br> <br>
+
+		<%
+			ArrayList<RegVo> list = (ArrayList) session.getAttribute("list_studentDetails");
+		%>
+
+		<section class="content-section">
+			<div class="container">
+				<div class="row">
+					<%
+						for (RegVo rv : list) {
+					%>
+					
+					<%
+					String imagePath= "pic";
+					if(!rv.getRegistration_profilePic().equals("")){
+					imagePath = rv.getRegistration_profilePic().replace("\\", "/");
+					String path[] = imagePath.split("images");
+					imagePath = "../images"+path[1];} %> 
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image"
+								href="profileDetails.jsp?id=<%=rv.getRegistration_enrollment()%>">
+								<img src="<%=request.getContextPath()%>/ImageServlet?imageID=<%=rv.getRegistration_profilePic() %>" height="140"
+								width="140" class="img-circle "
+								onError="this.onerror=null;this.src='../images/defaultProfilePic.png';" />
+							</a>
+							<h4>
+								<a
+									href="profileDetails.jsp?id=<%=rv.getRegistration_enrollment()%>"><%=rv.getRegistration_name()%></a><br />
+								<small><%=rv.getRegistration_department()%> Engineering</small>
+								<small>Semester <%=rv.getRegistration_semester()%></small>
+							</h4>
+						</div>
+					</div>
+					<%
+						}
+					%>
+					<!-- <div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-2.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">Mia Blunt</a> <small>Secretary</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-3.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">Bob Ashton</a> <small>Creative Director</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>-->
+				</div>
+			</div>
+		</section>
+
+		<!-- <section class="content-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-1.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">John Doe</a> <small>CEO / Chief Executive
+									Office</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-2.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">Mia Blunt</a> <small>Secretary</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-3.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">Bob Ashton</a> <small>Creative Director</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="content-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-1.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">John Doe</a> <small>CEO / Chief Executive
+									Office</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-2.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">Mia Blunt</a> <small>Secretary</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="staff-member">
+							<a class="image" href="#"> <img
+								src="../images/staff-member-3.png"
+								class="img-circle" />
+							</a>
+							<h4>
+								<a href="#">Bob Ashton</a> <small>Creative Director</small>
+							</h4>
+							<p>Donec id elit non mi porta gravida at eget metus. Fusce
+								dapibus, justo sit amet risus etiam porta sem...</p>
+							<ul class="social-networks">
+								<li><a href="#"> <i class="entypo-instagram"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-twitter"></i>
+								</a></li>
+								<li><a href="#"> <i class="entypo-facebook"></i>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>  -->
+			<jsp:include page="/User/footer.jsp"></jsp:include>
+
+	</div>
+	
+
+ <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>	
+	<script type="text/javascript">
+	
+	var xhttp = new XMLHttpRequest();
+	  var path = "<%=request.getContextPath()%>/ProvideResourcesServlet?operationtype=getStudentNames";
+	  xhttp.onreadystatechange = function() {
+	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	    	//alert(xhttp.responseText);
+	      response = JSON.parse(xhttp.responseText);
+	      
+	      
+	      $( "#name" ).autocomplete({
+	    	  source: response
+	    	  });
+	      
+	    }
+	  };
+	  xhttp.open("GET",path , true);
+	  xhttp.send();
+	</script>
+	
+	<script src="../js/frontendjs/gsap/main-gsap.js" id="script-resource-1"></script>
+	<script src="../js/frontendjs/bootstrap.js" id="script-resource-2"></script>
+	<script src="../js/frontendjs/joinable.js" id="script-resource-3"></script>
+	<script src="../js/frontendjs/resizeable.js" id="script-resource-4"></script>
+	<script src="../js/frontendjs/neon-custom.js" id="script-resource-5"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-28991003-7' ]);
+		_gaq.push([ '_setDomainName', 'demo.neontheme.com' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+<!-- Mirrored from demo.neontheme.com/frontend/about/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:29:41 GMT -->
+</html>
+<%}%>

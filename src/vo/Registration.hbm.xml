@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="vo.RegVo" table="REGISTRATION">
+      <meta attribute="class-description">
+         This class contains the registered student details. 
+      </meta>
+      <id name="registration_enrollment" type="long" column="enrollment">
+         <generator class="assigned"/>
+      </id>
+      <property name="registration_name" column="name" type="string"/>
+      <property name="registration_gender" column="gender" type="string"/>
+      <property name="registration_date" column="bdate" type="string"/>
+      <property name="registration_profilePic" column="profilePic" type="string"/>
+      <property name="registration_email" column="email" type="string"/>
+      <property name="registration_phone" column="phone" type="string"/>
+      <property name="registration_alternatePhone" column="alternatePhone" type="string"/>
+      <property name="registration_uname" column="uname" type="string"/>
+      <property name="registration_password" column="password" type="string"/>
+      <property name="registration_passingyear" column="passingyear" type="int"/>
+      <property name="registration_odetails" column="otherDetails" type="string"/>
+      <property name="registration_tdetails" column="trainingDetails" type="string"/>
+      <property name="registration_pdetails" column="projectDetails" type="string"/>
+      <property name="registration_department" column="department" type="string"/>
+      <property name="registration_semester" column="semester" type="int"/>
+   </class>
+</hibernate-mapping>

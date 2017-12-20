@@ -1,0 +1,444 @@
+<%@page import="javax.print.attribute.standard.Sides"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="vo.NoticeVo"%>
+<%@page import="vo.BlogsVo"%>
+<%@page import="vo.EventsVo" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<%if(session.getAttribute("enrollment") == null){
+	response.sendRedirect("login.jsp");
+}else{ %>
+<html lang="en">
+<head>
+
+
+<jsp:include page="/User/masterPage.jsp"></jsp:include>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Neon Admin Panel" />
+<meta name="author" content="Laborator.co" />
+<title>CampusTalk|Home</title>
+<style>
+.row1
+{
+  height:200px;
+  width:200px;
+}
+.row1 img
+{
+  max-width:100%; 
+  max-height:100%;
+  margin:auto;
+  display:block;
+}
+.file-input-wrapper {
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.file-input-wrapper input[type=file], .file-input-wrapper input[type=file]:focus,
+	.file-input-wrapper input[type=file]:hover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	z-index: 99;
+	outline: 0;
+}
+
+.file-input-name {
+	margin-left: 8px;
+}
+</style>
+<link href="../css/js-image-slider.css" rel="stylesheet" type="text/css" />
+
+<link href="../css/generic.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/jquery-ui-1.10.3.custom.min.css"
+	id="style-resource-4">
+
+<link rel="stylesheet" href="../css/entypo.css" id="style-resource-2">
+<link rel="stylesheet" href="../css/frontendcss/neon.css"
+	id="style-resource-3">
+<link rel="stylesheet" href="../css/neon-core.css" id="style-resource-5">
+
+<script>
+	$.noConflict();
+</script>
+<!--[if lt IE 9]><script src="http://demo.neontheme.com/assets/frontend/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+<!-- TS1442333912: Neon - Responsive Admin Template created by Laborator -->
+</head>
+
+<body class="page-body">
+<div class="page-container">
+		<div class="wrap">
+		<section class="slider-container"
+			style="background-image: url(../images/unnamed.jpg);">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-13">
+						<div class="slides" style="height: 319px;">
+
+							 <div class="slide ">
+								<div class="slide-image">
+								       <img src="../images/ld.png"
+										class="img-responsive" />
+								</div>
+							</div>
+							<div class="slide" data-bg="../images/slide-img-1-bg.png">
+								<div class="slide-image">
+									 <img src="../images/annexe.png"
+										class="img-responsive" />
+								</div>
+							</div>
+							<div class="slide">
+								<div class="slide-image">
+									<img src="../images/department.png"
+										class="img-responsive" />
+								</div>
+							</div>
+							<div class="slides-nextprev-nav">
+								<a href="#" class="prev"> <i class="entypo-left-open-mini"></i>
+								</a> <a href="#" class="next"> <i class="entypo-right-open-mini"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="features-blocks">
+			<div class="container">
+				<div class="row vspace">
+					<div class="col-sm-3">
+						<div class="portfolio-info">
+							<h3>
+								<a href="#">LATEST NOTICES</a>
+							</h3>
+						</div>
+					</div>
+					
+					<%
+						ArrayList<NoticeVo> ls = (ArrayList) session.getAttribute("latestNotices");
+					if(ls.size()!=0){
+					%>
+					<div class="col-sm-3">
+						<div class="tile-stats tile-blue" data-toggle="popover"
+									data-trigger="click" data-placement="right"
+									data-content="It's so simple to create a tooltop for my website!"
+									data-original-title="Twitter Bootstrap Popover">
+							<div class="icon">
+								<i class="entypo-docs"></i>
+							</div>
+							<%
+								String titlesub = ls.get(0).getNotice_title();
+								if (titlesub.length() >= 20) {
+									titlesub = titlesub.substring(0, 20) + "...";
+								}
+							%>
+							<div class="num">
+							<h2><b><font color="white"><%=titlesub%></font></b></h2>
+							</div>
+							<%
+								String titlesub2 = ls.get(0).getNotice_description();
+								if (titlesub2.length() >= 40) {
+									titlesub2 = titlesub2.substring(0, 40) + "...";
+								}
+							%>
+							<h3><%=titlesub2%></h3>
+						</div>
+						
+					</div>
+					<%} 
+					if(ls.size()>1){ %>
+					<div class="col-sm-3">
+						<div class="tile-stats tile-orange">
+							<div class="icon">
+								<i class="entypo-docs"></i>
+							</div>
+							<%
+								String titlesub3 = ls.get(1).getNotice_title();
+								if (titlesub3.length() >= 20) {
+									titlesub3 = titlesub3.substring(0, 20) + "...";
+								}
+							%>
+							<div class="num">
+								<h2><b><a href="#"  style="color: white;"><%=titlesub3%></a></b></h2></a>
+							</div>
+							<%
+								String titlesub4 = ls.get(1).getNotice_description();
+								if (titlesub4.length() >= 40) {
+									titlesub4 = titlesub4.substring(0, 40) + "...";
+								}
+							%>
+							<h3><%=titlesub4%></h3>
+						</div>
+					</div>
+					<%}if(ls.size()>2){ %>
+
+					<div class="col-sm-3">
+						<div class="tile-stats tile-cyan">
+							<div class="icon">
+								<i class="entypo-docs"></i>
+							</div>
+							<%
+								String titlesub5 = ls.get(2).getNotice_title();
+								if (titlesub5.length() >= 20) {
+									titlesub5 = titlesub5.substring(0, 20) + "...";
+								}
+							%>
+							<div class="num">
+							<h2><b>	<a href="#"  style="color: white;"><%=titlesub5%></h2></b></a>
+							</div>
+							<%
+								String titlesub6 = ls.get(2).getNotice_description();
+								if (titlesub6.length() >= 40) {
+									titlesub6 = titlesub6.substring(0, 40) + "...";
+								}
+							%>
+							<h3><%=titlesub6%></h3>
+						</div>
+					</div>
+					<%} %>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<hr />
+					</div>
+				</div>
+			</div>
+		</section>
+		<%
+			ArrayList<BlogsVo> blist = (ArrayList) session.getAttribute("latest blogs");
+		%>
+		<section class="portfolio-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="portfolio-info">
+							<h3>
+								<a
+									href="<%=request.getContextPath()%>/CTServlet?type=blog&operation=view&page=1&showcount=All&category=Art">Latest
+									Blogs</a>
+							</h3>
+						</div>
+					</div>
+					<%if(blist.size()!=0){ %>
+					<div class="col-sm-3">
+						<div class="portfolio-item row1">
+						<%String imagePath=""; 
+						if(!blist.get(0).getBlog_file().equals("")){
+						imagePath = blist.get(0).getBlog_file().replace("\\", "/");
+						String path[] = imagePath.split("images");
+						imagePath = "../images"+path[1];} %>
+							<a
+<<<<<<< HEAD
+								hreaf="blogDetailView_UI.jsp?id=<%=blist.get(0).getBlog_id()%>"
+								class="image"><img src="<%=request.getContextPath()%>/ImageServlet?imageID=<%=blist.get(0).getBlog_file()%>"
+=======
+								hreaf="blogDetailView_UI.jsp?id=<%=blist.get(0).getBlog_id()%>&isHome=true"
+								class="image"><img src="<%=imagePath%>"
+>>>>>>> ac1a2587141610def6d3756abf2ee68eed804ad9
+								class="img-rounded" alt="../images/blogdefault1.png" id="ïmg1" onError="this.onerror=null;this.src='../images/blogdefault1.png';this.style.heigh='40';this.style.width='40';"/> <span
+								class="hover-zoom"></span></a>
+
+							<h4>
+								<%
+									String titlesub11 = blist.get(0).getBlog_title();
+									if (titlesub11.length() >= 20) {
+										titlesub11 = titlesub11.substring(0, 20) + "...";
+									}
+								%>
+								<i class="entypo-docs"></i> <a
+									href="blogDetailView_UI.jsp?id=<%=blist.get(0).getBlog_id()%>&isHome=true"
+									class="name"><%=titlesub11%></a>
+							</h4>
+							<%
+								String descsub = blist.get(0).getBlog_description();
+								if (descsub.length() >= 40) {
+									descsub = descsub.substring(0, 40) + "...";
+								}
+							%>
+							<div class="categories">
+								<%=descsub%>
+							</div>
+						</div>
+					</div>
+					<%}if(blist.size()>1){ %>
+					<div class="col-sm-3">
+						<div class="portfolio-item row1">
+						<%String imagePath1=""; 
+						if(!blist.get(1).getBlog_file().equals("")){
+						imagePath1 = blist.get(1).getBlog_file().replace("\\", "/");
+						String path[] = imagePath1.split("images");
+						imagePath1 = "../images"+path[1];} %>
+<<<<<<< HEAD
+							<a href="blogDetailView_UI.jsp?id=<%=blist.get(1).getBlog_id()%>"
+								class="image"> <img src="<%=request.getContextPath()%>/ImageServlet?imageID=<%=blist.get(1).getBlog_file()%>"
+=======
+							<a href="blogDetailView_UI.jsp?id=<%=blist.get(1).getBlog_id()%>&isHome=true"
+								class="image"> <img src="<%=imagePath1%>"
+>>>>>>> ac1a2587141610def6d3756abf2ee68eed804ad9
+								class="img-rounded" height="50" width="50"
+								alt="../images/blogdefault1.png" id="img2" onError="this.onerror=null;this.src='../images/blogdefault1.png';this.style.heigh='40';this.style.width='40';"/> <span class="hover-zoom"></span>
+							</a>
+							<h4>
+								<%
+									String titlesub12 = blist.get(1).getBlog_title();
+									if (titlesub12.length() >= 20) {
+										titlesub12 = titlesub12.substring(0, 20) + "...";
+									}
+								%>
+								<i class="entypo-docs"></i> <a
+									href="blogDetailView_UI.jsp?id=<%=blist.get(1).getBlog_id()%>&isHome=true"
+									class="name"><%=titlesub12%></a>
+							</h4>
+							<%
+								String descsub2 = blist.get(1).getBlog_description();
+								if (descsub2.length() >= 40) {
+									descsub2 = descsub2.substring(0, 40) + "...";
+								}
+							%>
+							<div class="categories">
+								<%=descsub2%>
+							</div>
+						</div>
+					</div>
+					<%}if(blist.size()>2){ %>
+					<div class="col-sm-3">
+						<div class="portfolio-item row1">
+						<%String imagePath2=""; 
+						if(!blist.get(2).getBlog_file().equals("")){
+						imagePath2 = blist.get(2).getBlog_file().replace("\\", "/");
+						String path[] = imagePath2.split("images");
+						imagePath2 = "../images"+path[1];} %>
+<<<<<<< HEAD
+							<a href="blogDetailView_UI.jsp?id=<%=blist.get(2).getBlog_id()%>"
+								class="image"> <img src="<%=request.getContextPath()%>/ImageServlet?imageID=<%=blist.get(2).getBlog_file()%>"
+=======
+							<a href="blogDetailView_UI.jsp?id=<%=blist.get(2).getBlog_id()%>&isHome=true"
+								class="image"> <img src="<%=imagePath2%>"
+>>>>>>> ac1a2587141610def6d3756abf2ee68eed804ad9
+								class="img-rounded" width="50" height="50"
+								alt="../images/blogdefault1.png" id="img3" onError="this.onerror=null;this.src='../images/blogdefault1.png';this.style.heigh='40%';this.style.width='40%';"/> <span class="hover-zoom"></span>
+							</a>
+							<h4>
+								<%
+									String titlesub13 = blist.get(2).getBlog_title();
+									if (titlesub13.length() >= 20) {
+										titlesub13 = titlesub13.substring(0, 20) + "...";
+									}
+								%>
+								<i class="entypo-docs"></i> <a
+									href="blogDetailView_UI.jsp?id=<%=blist.get(2).getBlog_id()%>&isHome=true"
+									class="name"><%=titlesub13%></a>
+							</h4>
+							<%
+								String descsub3 = blist.get(2).getBlog_description();
+								if (descsub3.length() >= 40) {
+									descsub3 = descsub3.substring(0, 40) + "...";
+								}
+							%>
+							<div class="categories">
+								<%=descsub3%>
+							</div>
+						</div>
+					</div>
+					<%} %>
+				</div>
+			</div>
+		</section>
+		
+		
+		
+		<section class="testimonials-container">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="testimonials carousel slide" data-interval="8000">
+						<div class="carousel-inner">
+							<div class="item active">
+								<blockquote>
+									<p>
+										Vivamus imperdiet felis consectetur onec eget orci adipiscing
+										nunc. <br /> Pellentesque fermentum, ante ac interdum
+										ullamcorper.
+									</p>
+									<small> <cite>Art Ramadani</cite> - co-founder at
+										Laborator
+									</small>
+								</blockquote>
+							</div>
+							<div class="item">
+								<blockquote>
+									<p>
+										Entered of cordial do on no hearted. Yet agreed whence and
+										unable limits. <br /> Use off him gay abilities concluded
+										immediate allowance.
+									</p>
+									<small> <cite>Larry Page</cite> - co-founder at Google
+									</small>
+								</blockquote>
+							</div>
+							<div class="item">
+								<blockquote>
+									<p>
+										Of regard warmth by unable sudden garden ladies. No kept hung
+										am size spot no. <br /> Likewise led and dissuade rejoiced
+										welcomed husbands boy.
+									</p>
+									<small> <cite>Bill Gates</cite> - ceo at Microsoft
+									</small>
+								</blockquote>
+							</div>
+							<!-- 	<div class="testimonials-nav">
+								<a href="#" data-index="0" class=""></a><a href="#"
+									data-index="1" class=""></a><a href="#" data-index="2"
+									class="active"></a>
+							</div> -->
+						</div>
+					</div>
+				</div>
+		</div>
+		
+	
+		</section>
+	</div>
+	</div>
+	
+		<script src="../js/frontendjs/gsap/main-gsap.js" id="script-resource-1"></script>
+	<script src="../js/frontendjs/bootstrap.js" id="script-resource-2"></script>
+	<script src="../js/frontendjs/joinable.js" id="script-resource-3"></script>
+	<script src="../js/frontendjs/resizeable.js" id="script-resource-4"></script>
+	<script src="../js/frontendjs/neon-slider.js" id="script-resource-5"></script>
+	<script src="../js/frontendjs/jquery-1.11.0.min.js"></script>
+	<!-- JavaScripts initializations and stuff -->
+	<script src="../js/frontendjs/neon-custom.js" id="script-resource-6"></script>
+	
+	 <script src="../js-image-slider.js" type="text/javascript" id="script-resource-7"></script> 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-28991003-7' ]);
+		_gaq.push([ '_setDomainName', 'demo.neontheme.com' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+<!-- Mirrored from demo.neontheme.com/frontend/main/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:23:23 GMT -->
+</html>
+<%}%>

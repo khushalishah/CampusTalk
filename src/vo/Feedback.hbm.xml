@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="vo.FeedbackVo" table="FEEDBACK">
+		<meta attribute="class-description">
+			This class contains feedback information.
+		</meta>
+		<id name="fId" type="int" column="feedback_id">
+			<generator class="increment" />
+		</id>
+		<property name="fDepartment" column="department" type="string" />
+		<property name="fDivision" column="division" type="string" />
+		<property name="fCourseCode" column="courseCode" type="string" />
+		<property name="fCourseTitle" column="courseTitle" type="string" />
+		<property name="fNameOfTeacher" column="nameOfTeacher" type="string" />
+		<property name="fSemester" column="semester" type="int" />
+		<property name="fComment" column="comment" type="string" />
+		<property name="que1" column="que1" type="int" />
+		<property name="que2" column="que2" type="int" />
+		<property name="que3" column="que3" type="int" />
+		<property name="que4" column="que4" type="int" />
+		<property name="que5" column="que5" type="int" />
+		<property name="que6" column="que6" type="int" />
+		<property name="que7" column="que7" type="int" />
+		<property name="que8" column="que8" type="int" />
+		<property name="que9" column="que9" type="int" />
+		<property name="que10" column="que10" type="int" />
+		<property name="que11" column="que11" type="int" />
+		<property name="que12" column="que12" type="int" />
+		<property name="que13" column="que13" type="int" />
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="vo.NoticeVo" table="NOTICE">
+      <meta attribute="class-description">
+         This class contains the Notice detail. 
+      </meta>
+      <id name="notice_id" type="int" column="notice_id">
+         <generator class="increment"/>
+      </id>
+      <property name="notice_semester" column="notice_semester" type="string"/>
+      <property name="notice_fEnrollment" column="notice_fEnrollment" type="long" />
+      <property name="notice_title" column="notice_title" type="string" />
+      <property name="notice_startDate" column="notice_startDate" type="string"/>
+      <property name="notice_endDate" column="notice_endDate" type="string" />   
+      <property name="notice_document" column="notice_document" type="string" />
+      <property name="notice_description" column="notice_description" type="text"/>
+   </class>
+</hibernate-mapping>

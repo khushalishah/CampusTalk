@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="vo.EventsVo" table="EVENTS">
+      <id name="event_id" type="int" column="event_id">
+         <generator class="increment"/>
+      </id>
+      <property name="event_enrollment" column="event_enrollment" type="long" />
+      <property name="event_title" column="event_title" type="string" />
+      <property name="event_startDate" column="event_startDate" type="string"/>
+      <property name="event_endDate" column="event_endDate" type="string" />  
+      <property name="event_time" column="event_time" type="string" /> 
+      <property name="event_document" column="event_document" type="string" />
+      <property name="event_description" column="event_description" type="text"/>
+      
+   </class>
+</hibernate-mapping>

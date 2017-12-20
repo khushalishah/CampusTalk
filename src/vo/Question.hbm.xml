@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+   <class name="vo.QuestionVo" table="QUESTION">
+     
+      <id name="question_id" type="integer" column="question_id">
+          <generator class="increment"/> 
+      </id>
+      <property name="question_department" column="question_department" type="string"/>
+      <property name="question_semester" column="question_semester" type="integer"/>
+      <property name="question_name" column="question_name" type="string"/>
+      <property name="question_title" column="question_title" type="string"/>
+      <property name="question_date" column="question_date" type="string"/>
+      <property name="question_enrollment" column="question_enrollment" type="long"/>
+      <set name="children" cascade="all" lazy="false">
+ 
+		<key column="queID" />
+		<one-to-many class="vo.AnswerVo"/>
+ 
+		</set>
+   </class>
+</hibernate-mapping>

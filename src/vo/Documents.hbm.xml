@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+   <class name="vo.DocumentsVo" table="Documents">
+      <id name="document_enrollment" type="long" column="document_enrollment">
+         <generator class="assigned"/>
+      </id>
+     
+     
+      <property name="document_photo" column="document_photo" type="string"/>
+       <property name="document_sign" column="document_sign" type="string"/>
+      <property name="document_10th" column="document_10th" type="string"/>
+      <property name="document_12th" column="document_12th" type="string"/>
+      <property name="document_sem1" column="document_sem1" type="string"/>
+      <property name="document_sem2" column="document_sem2" type="string"/>
+      <property name="document_sem3" column="document_sem3" type="string"/>
+      <property name="document_sem4" column="document_sem4" type="string"/>
+      <property name="document_sem5" column="document_sem5" type="string"/>
+      <property name="document_sem6" column="document_sem6" type="string"/>
+      <property name="document_sem7" column="document_sem7" type="string"/>
+      <property name="document_sem8" column="document_sem8" type="string"/>
+      <property name="document_clgId" column="document_clgId" type="string"/>
+      <property name="document_uniqueId" column="document_uniqueId" type="string"/>
+      <property name="document_drivingL" column="document_drivingL" type="string"/>
+      <property name="document_birthC" column="document_birthC" type="string"/>
+      <property name="document_other" column="document_other" type="string"/>
+      
+   </class>
+</hibernate-mapping>

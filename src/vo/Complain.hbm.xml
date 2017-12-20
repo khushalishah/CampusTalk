@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+   <class name="vo.ComplainVo" table="COMPLAIN">
+     
+      <id name="complain_id" type="integer" column="complain_id">
+         <generator class="increment"/>
+      </id>
+      <property name="complain_department" column="complain_department" type="string"/>
+      <property name="complain_enrollment" column="enrollment" type="long"/>
+      <property name="complain_title" column="complain_title" type="string"/>
+      <property name="complain_description" column="complain_description" type="string"/>
+      <property name="complain_name" column="complain_name" type="string"/>
+      <property name="complain_date" column="complain_date" type="string"/>
+      <property name="complain_semester" column="complain_semester" type="integer"/>
+      
+      
+   </class>
+</hibernate-mapping>

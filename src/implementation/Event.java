@@ -1,0 +1,152 @@
+package implementation;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import controller.CTInterface;
+import dao.CTDao;
+import dao.EventsDao;
+import vo.EventsVo;
+import vo.PathResourse;
+
+public class Event implements CTInterface {
+
+	CTDao cd=new EventsDao();
+	
+	@Override
+	public void insert(HttpServletRequest request,HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		long event_enrollment=(long)session.getAttribute("enrollment");
+		String event_title=request.getParameter("event_title");
+		String event_startDate=request.getParameter("event_startDate");
+		String event_endDate=request.getParameter("event_endDate");
+		String event_time=request.getParameter("event_time");
+	    String event_document=request.getParameter("document");
+		String event_description=request.getParameter("event_description");
+		UploadFile uf=new UploadFile();
+		SimpleDateFormat sdf= new SimpleDateFormat("EEE, dd MMMM yyyy");
+		Date strtdate = null;
+		Date endate=null;
+		try {
+			strtdate = sdf.parse(event_startDate);
+			endate=sdf.parse(event_endDate);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startdate = sdf.format(strtdate);
+		String enddate=sdf.format(endate);
+		try
+		{   
+			String path = PathResourse.path+"Events";
+			event_document=uf.uploadFile(request,path,"document");
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		EventsVo events=new EventsVo(event_enrollment,event_title,startdate,enddate,event_time,event_document, event_description);
+     	cd.insert(events);
+		try{
+		response.sendRedirect("Admin/events.jsp?msg=success");
+		}
+		catch(Exception e){}
+		
+		
+	}
+
+	@Override
+	public void delete(HttpServletRequest request,HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(false);
+		int id=Integer.parseInt(request.getParameter("id"));
+		cd.delete(id);
+		try{
+			response.sendRedirect(request.getContextPath()+"/CTServlet?type=event&operation=view&id="+session.getAttribute("enrollment"));
+			}
+			catch(Exception e){}
+		
+	}
+
+	@Override
+	public void view(HttpServletRequest request,HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		long id=Long.parseLong(request.getParameter("id"));
+		HttpSession session = request.getSession(false);
+		String type=(String) session.getAttribute("type");
+		try{
+			if(type.equals("user"))
+			{
+				ArrayList<EventsVo> list=(ArrayList)((EventsDao)cd).view(3,1);
+				session.setAttribute("list",list);
+				response.sendRedirect("User/event_UI.jsp");
+			}
+			else
+			{
+				
+				ArrayList<EventsVo> list=(ArrayList)cd.view(id);
+				session.setAttribute("list",list);
+				response.sendRedirect("Admin/eventsearch.jsp");
+			}
+		      
+			}
+			
+		catch(Exception e){}
+	}
+
+	@Override
+	public void edit(HttpServletRequest request,HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(false);
+		int id=Integer.parseInt(request.getParameter("id"));
+		String event_time=request.getParameter("event_time");
+		long event_enrollment=Long.parseLong(request.getParameter("fid"));
+		String event_title=request.getParameter("event_title");
+		String event_startDate=request.getParameter("event_startDate");
+		String event_endDate=request.getParameter("event_endDate");
+		
+		System.out.println(event_startDate+"  "+event_endDate);
+		String event_document=request.getParameter("document");
+		String event_description=request.getParameter("event_description");
+		UploadFile uf=new UploadFile();
+		String document="";
+		SimpleDateFormat sdf= new SimpleDateFormat("EEE, dd MMMM yyyy");
+		Date strtdate = null;
+		Date endate=null;
+		try {
+			strtdate = sdf.parse(event_startDate);
+			endate=sdf.parse(event_endDate);
+			
+			
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startdate = sdf.format(strtdate);
+		String enddate=sdf.format(endate);
+		
+		System.out.println(startdate+"   "+enddate);
+		
+		try
+		{   
+			String path = PathResourse.path+"Events";
+			event_document=uf.uploadFile(request,path,"document");
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		EventsVo ev=new EventsVo(id,event_enrollment, event_title, startdate,enddate,event_time,event_document, event_description);
+    	cd.edit(ev);
+		try{
+			response.sendRedirect(request.getContextPath()+"/CTServlet?type=event&operation=view&id="+session.getAttribute("enrollment"));
+			}
+			catch(Exception e){}
+
+	}
+}
